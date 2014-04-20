@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="static/proflib-visualizer.css">
+
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="static/visualizer.js"></script>
+        <script src="static/links.js"></script>
+        <script src="static/nodes.js"></script>
+        <script src="static/tree.js"></script>
+    </head>
+
+    <body>
+        <div id="proflib-visualizer-container">
+        </div>
+        <div id="proflib-visualizer-container-2">
+        </div>
+        <script>
+            var visualizer = new Visualizer();
+        </script>
+    </body>
+</html>
