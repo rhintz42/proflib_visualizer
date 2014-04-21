@@ -13,14 +13,13 @@ function Visualizer() {
     };
 
     width = 800 - self.margin.right - self.margin.left;
-    //height = 1800 - self.margin.top - self.margin.bottom;
-    height = 800 - self.margin.top - self.margin.bottom;
+    height = 450 - self.margin.top - self.margin.bottom;
 
     adjustedWidth = width + self.margin.right + self.margin.left;
     adjustedHeight = height + self.margin.top + self.margin.bottom;
 
-    //self.jsonFile = "/static/flare.json";
-    self.jsonFile = "/static/func.json";
+    //self.jsonFile = "/static/json/flare.json";
+    self.jsonFile = "/static/json/func.json";
 
     self.duration = 750;
 
@@ -34,7 +33,7 @@ function Visualizer() {
 
     self.tree = new Tree(self, self.jsonFile);
 
-    d3.select(self.frameElement).style("height", "800px");
+    d3.select(self.frameElement).style("height", adjustedHeight+"px");
 }
 
 Visualizer.prototype.getHeight = function() {

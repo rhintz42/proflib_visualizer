@@ -1,11 +1,12 @@
-//Create tooltip element
-//var tooltip;
-
+// TODO: FUNCTIONNS TO ADD
+//  - toggleCollapse
+//  - hide (Maybe not for now)
 function NodeList(tree, nodes) {
     var self = this;
 
     self.tree = tree;
     self.nodes = nodes;
+    self.padding = 10;
 
     self.tooltip = d3.select("#proflib-visualizer-container")
     .append("div")
@@ -13,14 +14,20 @@ function NodeList(tree, nodes) {
     .style("position", "absolute")
     .style("z-index", "10")
     .style("opacity", 0);
+
+    self.nodeDescription = d3.select("#node-description-container")
+    .append("div")
+    .attr("class", "node-description")
+    //.style("width", "200px")
+    //.style("height", "100px")
 }
 
 
 // Enter any new nodes at the parent's previous position.
 NodeList.prototype.createChildToParentPosition = function(parentNode, svgNodes) {
-    var self = this,
-        padding = 10;
+    var self = this;
 
+    // Create Node
     var nodeEnter = svgNodes.enter()
         .append("g")
         .attr("class", "node")
@@ -33,6 +40,7 @@ NodeList.prototype.createChildToParentPosition = function(parentNode, svgNodes) 
         .on("mousemove", mousemove.bind(self))
         .on("mouseout", mouseout.bind(self));
     
+    // Create Rectangle Representation
     var rects = nodeEnter.append("rect")
         .attr("x", function(d) {
             return 0;
@@ -44,6 +52,7 @@ NodeList.prototype.createChildToParentPosition = function(parentNode, svgNodes) 
         .attr("height", 20)
         .style("opacity", 1e-6);
     
+    // Create Text Inside Rect
     var texts = nodeEnter.append("text")
         .attr("x", function(d) {
             return 0;
@@ -55,13 +64,14 @@ NodeList.prototype.createChildToParentPosition = function(parentNode, svgNodes) 
         .style("fill-opacity", 1e-6);
     
     
+    // Resize Rects to Size of Text
     for(var i = 0; i < texts[0].length; i++) {
         if(texts[0][i] === null || rects[0][i] === null)
             continue;
         var w = texts[0][i].getBBox().width;
 
-        rects[0][i].setAttribute("x", -padding);
-        rects[0][i].setAttribute("width", w + (padding*2));
+        rects[0][i].setAttribute("x", -self.padding);
+        rects[0][i].setAttribute("width", w + (self.padding*2));
     }
     
 }
@@ -87,7 +97,6 @@ NodeList.prototype.transitionToNewPosition = function(svgNodes) {
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
 }
-
 
 
 // Transition exiting nodes to the parent's new position.
@@ -180,12 +189,12 @@ NodeList.prototype.click = function(d) {
 
 
 
-function mousemove()
+function mousemove(node)
 {    //Move tooltip to mouse location
     return this.tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");                            
 }
 
-function mouseout()
+function mouseout(node)
 {
     //d3.select(this) 
     //    .attr("class", "dataCircle"); //Recolor circle steel blue
@@ -201,7 +210,7 @@ function mouseout()
 
 
 //Mouseover function for circles, displays shortened tooltip and causes other circles to become opaque
-function mouseover()
+function mouseover(node)
 {
     var myCircle = d3.select(this);
     
@@ -226,12 +235,18 @@ function mouseover()
     
 }
 
-function mousedown()
+function mousedown(node)
 {
     this.tooltip.transition() 
         .duration(200)
         .style("opacity", 1);
 
+    this.setTooltipLong(node);
+
+    this.setNodeDescription(node);
+}
+
+NodeList.prototype.setTooltipLong = function(node) {
     this.tooltip.html(
         "Username: " + "rhintz42" + "<br/>" +
         "Session ID: " + "42" + "<br/>" + 
@@ -244,20 +259,25 @@ function mousedown()
         "Duration: " + "4242" + "<br/>" +
         "Timestamp: " + "341215341253" + "<br/>" +           
         "System ID: " + "7"
-    )
-    /*
-    tooltip.html(
-        "Username: " + d3.select(this).attr("username") + "<br/>" +
-        "Session ID: " + d3.select(this).attr("sessionid") + "<br/>" + 
-        "Impact CPU: " + d3.select(this).attr("impact") + "<br/>" +
-        "Request CPU: " + d3.select(this).attr("reqcpu") + "<br/>" + 
-        "Request IO: " + d3.select(this).attr("reqio") + "<br/>" +
-        "PJI: " + d3.select(this).attr("pji") + "<br/>" +
-        "CPU Skew: " + d3.select(this).attr("cpuskew") + "<br/>" +
-        "IO Skew: " + d3.select(this).attr("ioskew") + "<br/>" +
-        "Duration: " + d3.select(this).attr("duration") + "<br/>" +
-        "Timestamp: " + d3.select(this).attr("timestamp") + "<br/>" +           
-        "System ID: " + d3.select(this).attr("systemid")
-    )
-    */
+    );
+}
+
+NodeList.prototype.setNodeDescription = function(node) {
+    var children = node.children || node._children;
+    var childrenStr = '';
+
+    for(var i in children) {
+      childrenStr += children[i].function_name + ", ";
+    }
+
+    this.nodeDescription.html(
+        "Function Name: " + node.function_name + "<br/>" +
+        "Called By Function Name: " + node.called_by_function_name + "<br/>" + 
+        "Filename: " + node.filename + "<br/>" +
+        "ID: " + node.id + "<br/>" + 
+        "Local Variables: <code>" + JSON.stringify(node.local_variables) + "</code><br/>" +
+        "Position Called In: " + node.pos_called_in + "<br/>" +
+        "Time Finished: " + node.time + "<br/>" +
+        "Children: <code>" + JSON.stringify(children) + "</code>"
+    );
 }
