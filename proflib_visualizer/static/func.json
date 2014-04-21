@@ -1,3 +1,4 @@
+[
 {
     "called_by_function_name": "my_view", 
     "children": [
@@ -136,4 +137,105 @@
     "parent": null, 
     "pos_called_in": 10, 
     "time": 1397976854.759154
+},
+{
+    "called_by_function_name": "my_view", 
+    "children": [
+        {
+            "called_by_function_name": "foo", 
+            "children": [
+                {
+                    "called_by_function_name": "bar", 
+                    "children": [], 
+                    "filename": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+                    "function_name": "ba", 
+                    "local_variables": {
+                        "d": 3, 
+                        "var": 3
+                    }, 
+                    "parent": null, 
+                    "pos_called_in": 1, 
+                    "time": 1397976854.759068
+                }, 
+                {
+                    "called_by_function_name": "bar", 
+                    "children": [], 
+                    "filename": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+                    "function_name": "ba", 
+                    "local_variables": {
+                        "d": "j", 
+                        "var": "j"
+                    }, 
+                    "parent": null, 
+                    "pos_called_in": 2, 
+                    "time": 1397976854.759082
+                }
+            ], 
+            "filename": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+            "function_name": "bar", 
+            "local_variables": {
+                "b": 20, 
+                "d": 3, 
+                "k": "j", 
+                "tr": true
+            }, 
+            "parent": null, 
+            "pos_called_in": 3, 
+            "time": 1397976854.759092
+        }, 
+        {
+            "called_by_function_name": "foo", 
+            "children": [], 
+            "filename": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+            "function_name": "fo", 
+            "local_variables": {
+                "c": 30
+            }, 
+            "parent": null, 
+            "pos_called_in": 4, 
+            "time": 1397976854.7591
+        }, 
+        {
+            "called_by_function_name": "foo", 
+            "children": [
+                {
+                    "called_by_function_name": "bar", 
+                    "children": [], 
+                    "filename": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+                    "function_name": "ba", 
+                    "local_variables": {
+                        "d": 4, 
+                        "var": 4
+                    }, 
+                    "parent": null, 
+                    "pos_called_in": 5, 
+                    "time": 1397976854.759112
+                }
+            ], 
+            "filename": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+            "function_name": "bar", 
+            "local_variables": {
+                "b": 20, 
+                "d": 4, 
+                "k": "z", 
+                "tr": false
+            }, 
+            "parent": null, 
+            "pos_called_in": 7, 
+            "time": 1397976854.759129
+        }
+    ], 
+    "filename": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+    "function_name": "foo", 
+    "local_variables": {
+        "a": 10, 
+        "c": 30, 
+        "e": 20, 
+        "g": 20, 
+        "h": 20
+    }, 
+    "parent": null, 
+    "pos_called_in": 10, 
+    "time": 1397976854.759154
 }
+]

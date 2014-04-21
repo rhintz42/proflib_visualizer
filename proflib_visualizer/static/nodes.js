@@ -127,7 +127,8 @@ NodeList.prototype.getSVGList = function(nodes) {
 // Normalize for fixed-depth.
 NodeList.prototype.updateY = function(nodes) {
     nodes.forEach(function(d) {
-        d.y = d.depth * 180;
+        var depth = d.depth - 1; //Accomodate for root node
+        d.y = depth * 180;
     });
 }
 
@@ -171,9 +172,8 @@ NodeList.prototype.click = function(d) {
     // TODO: THIS IS TEST CODE!!! 
     // This is test code to see if can increase the width and stuff
     // Turns out I needed to take off the append of 'g' on the svg object when I store it
-    self.tree.visualizer.width += 100;
-    self.tree.visualizer.svg.attr("width", self.tree.visualizer.width);
-    self.tree.visualizer.svg.attr("viewBox", "0 0 " + (self.tree.visualizer.width + 100) + " " + self.tree.visualizer.height);
+    self.tree.visualizer.changeWidth(100);
+    self.tree.visualizer.changeViewBoxWidth(100);
     self.tree.update(d);
 }
 

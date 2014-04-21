@@ -1,5 +1,9 @@
 function Visualizer() {
-    var self = this;
+    var self = this,
+        width,
+        height,
+        adjustedWidth,
+        adjustedHeight;
 
     self.margin = {
         top: 20,
@@ -8,8 +12,12 @@ function Visualizer() {
         left: 120
     };
 
-    self.width = 300 - self.margin.right - self.margin.left;
-    self.height = 800 - self.margin.top - self.margin.bottom;
+    width = 800 - self.margin.right - self.margin.left;
+    //height = 1800 - self.margin.top - self.margin.bottom;
+    height = 800 - self.margin.top - self.margin.bottom;
+
+    adjustedWidth = width + self.margin.right + self.margin.left;
+    adjustedHeight = height + self.margin.top + self.margin.bottom;
 
     //self.jsonFile = "/static/flare.json";
     self.jsonFile = "/static/func.json";
@@ -17,14 +25,53 @@ function Visualizer() {
     self.duration = 750;
 
     self.svg = d3.select("#proflib-visualizer-container").append("svg")
-        .attr('viewBox', '0 0 '+ ( self.width + self.margin.right + self.margin.left ) + ' ' + ( self.height + self.margin.top + self.margin.bottom ) )
-        .attr("width", self.width + self.margin.right + self.margin.left)
-        .attr("height", self.height + self.margin.top + self.margin.bottom)
+        .attr('viewBox', self.dimensionsToViewBoxString(0, 0, adjustedWidth, adjustedHeight) )
+        .attr("width", adjustedWidth)
+        .attr("height", adjustedHeight)
     
-    self.svg.append("g")
+    self.g = self.svg.append("g")
         .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")");
 
     self.tree = new Tree(self, self.jsonFile);
 
     d3.select(self.frameElement).style("height", "800px");
+}
+
+Visualizer.prototype.getHeight = function() {
+    var height = this.svg.property('height').baseVal.value;
+    return height;
+}
+
+Visualizer.prototype.getWidth = function() {
+    var width = this.svg.property('width').baseVal.value;
+    return width;
+}
+
+// 
+Visualizer.prototype.changeWidth = function(dif) {
+    var newWidth = this.getWidth() + dif;
+
+    this.svg.attr("width", newWidth);
+}
+
+Visualizer.prototype.dimensionsToViewBoxString = function(x, y, width, height) {
+    var self = this;
+
+    return x + ' ' + y + ' ' + width + ' ' + height;
+}
+
+// This controls how much of the view can be seen. Does not control the area
+//  that the display covers in the browser, but will make the image smaller or
+//  bigger (Like Google Maps)
+Visualizer.prototype.viewBoxGetWidth = function() {
+    return this.svg.property('viewBox').baseVal.width;
+}
+
+Visualizer.prototype.viewBoxGetHeight = function() {
+    return this.svg.property('viewBox').baseVal.height;
+}
+
+Visualizer.prototype.changeViewBoxWidth = function(dif) {
+    var newWidth = this.viewBoxGetWidth() + dif;
+    this.svg.attr("viewBox", "0 0 " + newWidth + " " + this.viewBoxGetHeight());
 }
