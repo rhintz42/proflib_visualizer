@@ -16,7 +16,7 @@ Tree.prototype.collapseChildren = function() {
     var self = this;
 
     function collapse(d) {
-        if (d.children) {
+        if (d && d.children) {
             d._children = d.children;
             d._children.forEach(collapse);
             d.children = null;

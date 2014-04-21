@@ -19,7 +19,8 @@ function Visualizer() {
     adjustedHeight = height + self.margin.top + self.margin.bottom;
 
     //self.jsonFile = "/static/json/flare.json";
-    self.jsonFile = "/static/json/func.json";
+    //self.jsonFile = "/static/json/func.json";
+    self.jsonFile = "/static/json/anweb.json";
 
     self.duration = 750;
 

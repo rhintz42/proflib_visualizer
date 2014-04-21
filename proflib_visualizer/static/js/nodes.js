@@ -267,7 +267,9 @@ NodeList.prototype.setNodeDescription = function(node) {
     var childrenStr = '';
 
     for(var i in children) {
-      childrenStr += children[i].function_name + ", ";
+        if(children[i]) {
+            childrenStr += children[i].function_name + ", ";
+        }
     }
 
     this.nodeDescription.html(
@@ -278,6 +280,6 @@ NodeList.prototype.setNodeDescription = function(node) {
         "Local Variables: <code>" + JSON.stringify(node.local_variables) + "</code><br/>" +
         "Position Called In: " + node.pos_called_in + "<br/>" +
         "Time Finished: " + node.time + "<br/>" +
-        "Children: <code>" + JSON.stringify(children) + "</code>"
+        "Children: <code>" + childrenStr + "</code>"
     );
 }
