@@ -20,7 +20,8 @@ function Visualizer() {
 
     //self.jsonFile = "/static/json/flare.json";
     //self.jsonFile = "/static/json/func.json";
-    self.jsonFile = "/static/json/anweb.json";
+    //self.jsonFile = "/static/json/anweb.json";
+    self.jsonFile = "/static/json/anweb_2.json";
 
     self.duration = 750;
 

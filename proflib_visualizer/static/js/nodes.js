@@ -273,13 +273,16 @@ NodeList.prototype.setNodeDescription = function(node) {
     }
 
     this.nodeDescription.html(
-        "Function Name: " + node.function_name + "<br/>" +
-        "Called By Function Name: " + node.called_by_function_name + "<br/>" + 
-        "Filename: " + node.filename + "<br/>" +
-        "ID: " + node.id + "<br/>" + 
-        "Local Variables: <code>" + JSON.stringify(node.local_variables) + "</code><br/>" +
-        "Position Called In: " + node.pos_called_in + "<br/>" +
-        "Time Finished: " + node.time + "<br/>" +
+        "Function Name: " + node.function_name + "<br/>------------------------------<br/>" +
+        "Called By Function Name: " + node.called_by_function_name + "<br/>------------------------------<br/>" + 
+        "Filename: " + node.filename + "<br/>------------------------------<br/>" +
+        "ID: " + node.id + "<br/>------------------------------<br/>" + 
+        "Local Variables: <code>" + JSON.stringify(node.local_variables) + "</code><br/>------------------------------<br/>" +
+        "Position Called In: " + node.pos_called_in + "<br/>------------------------------<br/>" +
+        "Time Finished: " + node.time + "<br/>------------------------------<br/>" +
+        "Code: " + node.code + "<br/>------------------------------<br/>" +
+        "Docstring: " + node.docstring + "<br/>------------------------------<br/>" +
+        "Stack Trace: " + node.stack_trace + "<br/>------------------------------<br/>" +
         "Children: <code>" + childrenStr + "</code>"
     );
 }
