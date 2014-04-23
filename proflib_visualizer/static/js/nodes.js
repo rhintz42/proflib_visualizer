@@ -7,6 +7,8 @@ function NodeList(tree, nodes) {
     self.tree = tree;
     self.nodes = nodes;
     self.padding = 10;
+    
+    self.selected = null;
 
     self.tooltip = d3.select("#proflib-visualizer-container")
     .append("div")
@@ -171,18 +173,24 @@ NodeList.prototype.update = function(parentNode, updatedNodes) {
 NodeList.prototype.click = function(d) {
     var self = this;
 
-    if (d.children) {
-        d._children = d.children;
-        d.children = null;
-    } else {
-        d.children = d._children;
-        d._children = null;
+    self.selected = d;
+
+    if(self.tree.visualizer.action_type == 'toggle') {
+        if (d.children) {
+            d._children = d.children;
+            d.children = null;
+        } else {
+            d.children = d._children;
+            d._children = null;
+        }
     }
     // TODO: THIS IS TEST CODE!!! 
     // This is test code to see if can increase the width and stuff
     // Turns out I needed to take off the append of 'g' on the svg object when I store it
+    /*
     self.tree.visualizer.changeWidth(100);
     self.tree.visualizer.changeViewBoxWidth(100);
+    */
     self.tree.update(d);
 }
 

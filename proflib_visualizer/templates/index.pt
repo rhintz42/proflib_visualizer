@@ -13,6 +13,23 @@
     </head>
 
     <body>
+        <div id="action-type">
+            <select class="action-type" name="node">
+                <option selected="toggle">toggle</option>
+                <option>select</option>
+                <option>add</option>
+                <option>delete</option>
+                <option>edit</option>
+                <option>organize</option>
+            </select>
+        </div>
+        <div id="tree-modify">
+            <button id="node-add">ADD</button>
+            <button id="node-delete">DELETE</button>
+            <button id="node-edit">EDIT</button>
+            <button id="node-organize-up">ORGANIZE FUNCTION UP</button>
+            <button id="node-organize-down">ORGANIZE FUNCTION DOWN</button>
+        </div>
         <div id="proflib-visualizer-container"></div>
         <div id="node-description-container"></div>
         <script>

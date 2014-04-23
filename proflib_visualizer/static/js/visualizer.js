@@ -19,11 +19,13 @@ function Visualizer() {
     adjustedHeight = height + self.margin.top + self.margin.bottom;
 
     //self.jsonFile = "/static/json/flare.json";
-    //self.jsonFile = "/static/json/func.json";
+    self.jsonFile = "/static/json/func.json";
     //self.jsonFile = "/static/json/anweb.json";
-    self.jsonFile = "/static/json/anweb_2.json";
+    //self.jsonFile = "/static/json/anweb_2.json";
 
     self.duration = 750;
+
+    self.action_type = 'toggle';
 
     self.svg = d3.select("#proflib-visualizer-container").append("svg")
         .attr('viewBox', self.dimensionsToViewBoxString(0, 0, adjustedWidth, adjustedHeight) )
@@ -36,6 +38,14 @@ function Visualizer() {
     self.tree = new Tree(self, self.jsonFile);
 
     d3.select(self.frameElement).style("height", adjustedHeight+"px");
+    
+    // Put into a function for specific actions
+    $( ".action-type" )
+        .change(function() {
+            $( "select option:selected" ).each(function() {
+                self.action_type = $( this ).text();
+            });
+        });
 }
 
 Visualizer.prototype.getHeight = function() {
@@ -48,7 +58,6 @@ Visualizer.prototype.getWidth = function() {
     return width;
 }
 
-// 
 Visualizer.prototype.changeWidth = function(dif) {
     var newWidth = this.getWidth() + dif;
 

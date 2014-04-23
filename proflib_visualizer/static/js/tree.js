@@ -9,6 +9,82 @@ function Tree(visualizer, jsonFile) {
         .size([self.visualizer.getHeight(), self.visualizer.getWidth()]);
 
     self.createNodesAndLinks(self.visualizer.jsonFile);
+    
+    // Put in function like initialize buttons
+    $( "#node-add" )
+        .click( function () {
+            var nodes = self.getNodeList();
+            var selectedNode = nodes.selected;
+
+            if(selectedNode == null)
+                selectedNode = self.root;
+
+            selectedNode.children.push({
+                'function_name': 'test1',
+                'called_by_function_name': selectedNode.function_name
+            });
+            self.update(selectedNode);
+        });
+    $( "#node-delete" )
+        .click( function () {
+            var nodes = self.getNodeList();
+            var selectedNode = nodes.selected;
+
+            if(selectedNode == null)
+                return;
+
+            var parentNode = selectedNode.parent;
+            for(var i = 0; i < parentNode.children.length; i++) {
+                if(parentNode.children[i].id == selectedNode.id) {
+                    parentNode.children.splice(i, 1);
+                    break;
+                }
+            }
+            
+            self.update(parentNode);
+        });
+    $( "#node-edit" )
+        .click( function () {
+            alert("EDIT clicked");
+        });
+    $( "#node-organize-up" )
+        .click( function () {
+            var nodes = self.getNodeList();
+            var selectedNode = nodes.selected;
+
+            if(selectedNode == null)
+                return;
+
+            var parentNode = selectedNode.parent;
+            for(var i = parentNode.children.length-1; i > 0; i--) {
+                if(parentNode.children[i].id == selectedNode.id) {
+                    parentNode.children.splice(i, 1);
+                    parentNode.children.splice(i-1, 0, selectedNode);
+                    break;
+                }
+            }
+            
+            self.update(selectedNode);
+        });
+    $( "#node-organize-down" )
+        .click( function () {
+            var nodes = self.getNodeList();
+            var selectedNode = nodes.selected;
+
+            if(selectedNode == null)
+                return;
+
+            var parentNode = selectedNode.parent;
+            for(var i = 0; i < parentNode.children.length-1; i++) {
+                if(parentNode.children[i].id == selectedNode.id) {
+                    parentNode.children.splice(i, 1);
+                    parentNode.children.splice(i+1, 0, selectedNode);
+                    break;
+                }
+            }
+            
+            self.update(selectedNode);
+        });
 }
 
 
@@ -70,6 +146,10 @@ Tree.prototype.getAllLinksForNodes = function(nodes) {
     var self = this;
 
     return self.tree.links(nodes);
+}
+
+Tree.prototype.getNodeList = function() {
+    return this.nodes;
 }
 
 Tree.prototype.getAllNodes = function() {
