@@ -16,9 +16,16 @@ function Tree(visualizer, jsonFile) {
             var nodes = self.getNodeList();
             var selectedNode = nodes.selected;
 
-            if(selectedNode == null)
+            if(selectedNode === null)
                 selectedNode = self.root;
 
+            // Toggle Children
+            if(selectedNode.children === undefined || selectedNode.children === null) {
+                selectedNode.children = selectedNode._children;
+                selectedNode._children = null;
+            }
+
+            // Add to Node
             selectedNode.children.push({
                 'function_name': 'test1',
                 'called_by_function_name': selectedNode.function_name
