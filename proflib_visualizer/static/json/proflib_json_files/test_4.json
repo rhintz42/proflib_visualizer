@@ -1,0 +1,49 @@
+[
+    {
+        "called_by_function_name": "bar", 
+        "children": [], 
+        "code": [
+            "@prof(1)\n", 
+            "def ba(var):\n", 
+            "    d = var\n", 
+            "    return d\n", 
+            "\n", 
+            "\n"
+        ], 
+        "docstring": null, 
+        "file_path": "/opt/webapp/proflib/src/proflib/proflib/views.py", 
+        "function_name": "ba", 
+        "line_number": 15, 
+        "local_variables": {
+            "d": 4, 
+            "var": 4
+        }, 
+        "parent": null, 
+        "pos_called_in": 1, 
+        "stack_trace": [
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/waitress-0.8.8-py2.7.egg/waitress/task.py\", line 74, in handler_thread\n    task.service()\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/waitress-0.8.8-py2.7.egg/waitress/channel.py\", line 337, in service\n    task.service()\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/waitress-0.8.8-py2.7.egg/waitress/task.py\", line 173, in service\n    self.execute()\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/waitress-0.8.8-py2.7.egg/waitress/task.py\", line 392, in execute\n    app_iter = self.channel.server.application(env, start_response)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/router.py\", line 272, in __call__\n    response = self.invoke_subrequest(request, use_tweens=True)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/router.py\", line 247, in invoke_subrequest\n    response = handle_request(request)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid_debugtoolbar-2.0.2-py2.7.egg/pyramid_debugtoolbar/toolbar.py\", line 172, in toolbar_tween\n    response = _handler(request)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid_debugtoolbar-2.0.2-py2.7.egg/pyramid_debugtoolbar/panels/performance.py\", line 55, in resource_timer_handler\n    result = handler(request)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/tweens.py\", line 21, in excview_tween\n    response = handler(request)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/router.py\", line 163, in handle_request\n    response = view_callable(context, request)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/config/views.py\", line 355, in rendered_view\n    result = view(context, request)\n", 
+            "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/config/views.py\", line 501, in _requestonly_view\n    response = view(request)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 47, in my_view\n    b = bar(False)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 36, in bar\n    d = ba(4)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 83, in wrapped\n    response = func(*args, **kwargs)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 18, in ba\n    return d\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 56, in tracer\n    func.frame_list.add_frame(frame)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_list.py\", line 73, in add_frame\n    self._add_py_frame_to_frame_map(key, py_frame)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_list.py\", line 145, in _add_py_frame_to_frame_map\n    self._frame_map[key] = Frame(py_frame, pos=self.num_frames)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame.py\", line 31, in __init__\n    pos=pos)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame.py\", line 45, in _init_with_py_frame\n    self.frame_stack_trace = FrameStackTrace(self)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_stack_trace.py\", line 13, in __init__\n    self.stack_trace = traceback.format_stack()\n"
+        ], 
+        "time": 1398555143.987958
+    }
+]

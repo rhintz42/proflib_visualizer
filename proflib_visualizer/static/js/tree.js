@@ -1,4 +1,5 @@
-function Tree(visualizer, jsonFile) {
+//function Tree(visualizer, jsonFile) {
+function Tree(visualizer, jsonFiles) {
     var self = this;
 
     self.visualizer = visualizer;
@@ -8,7 +9,8 @@ function Tree(visualizer, jsonFile) {
     self.tree = d3.layout.tree()
         .size([self.visualizer.getHeight(), self.visualizer.getWidth()]);
 
-    self.createNodesAndLinks(self.visualizer.jsonFile);
+    //self.createNodesAndLinks(self.visualizer.jsonFile);
+    self.createNodesAndLinks(self.visualizer.jsonFiles, 0);
     
     // Put in function like initialize buttons
     $( "#node-add" )
@@ -125,28 +127,46 @@ Tree.prototype.createNodes = function() {
     return new NodeList(self, nodes);
 }
 
+/*
+    This function was created to keep the starting nodes in the correct order
+    that they were given in
+*/
+Tree.prototype.recCreateNodesAndLinks = function(jsonFiles, index) {
 
-Tree.prototype.createNodesAndLinks = function(jsonFile) {
-    var self = this;
+    var self = this,
+        f = jsonFiles[index]
 
-    d3.json(jsonFile, function(error, obj) {
+    d3.json(f, function(error, obj) {
         // This makes it so can have more children functions and more than 1
         //  actual root
-        self.root = newDummyRoot();
         
         // Add each root node from the jsonFile to the children of the dummy root
         obj.forEach(function(d) {
           self.root.children.push(d)
         });
 
-        self.collapseChildren();
+        if((index+1) < jsonFiles.length) {
+            self.recCreateNodesAndLinks(jsonFiles, index + 1)
+        } else {
+            // Call this only when no more children to call
+            self.collapseChildren();
 
-        self.links = self.createLinks();
-        self.nodes = self.createNodes();
-        self.update(self.root);
+            self.links = self.createLinks();
+            self.nodes = self.createNodes();
+            self.update(self.root);
+        }
 
-        return self.root;
     });
+}
+
+Tree.prototype.createNodesAndLinks = function(jsonFiles, index) {
+    var self = this;
+    
+    self.root = newDummyRoot();
+
+    self.recCreateNodesAndLinks(jsonFiles, index = 0)
+
+    return self.root;
 }
 
 Tree.prototype.getAllLinksForNodes = function(nodes) {

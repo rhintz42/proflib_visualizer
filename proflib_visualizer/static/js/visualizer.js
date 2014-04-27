@@ -18,10 +18,18 @@ function Visualizer() {
     adjustedWidth = width + self.margin.right + self.margin.left;
     adjustedHeight = height + self.margin.top + self.margin.bottom;
 
-    //self.jsonFile = "/static/json/flare.json";
-    self.jsonFile = "/static/json/func.json";
-    //self.jsonFile = "/static/json/anweb.json";
-    //self.jsonFile = "/static/json/anweb_2.json";
+    //self.jsonFiles = ["/static/json/func.json"];
+    //self.jsonFiles = ["/static/json/anweb.json"];
+    //self.jsonFiles = ["/static/json/anweb_2.json"];
+    
+    self.jsonFiles = [
+                        "/static/json/proflib_json_files/test_1.json",
+                        "/static/json/proflib_json_files/test_2.json",
+                        "/static/json/proflib_json_files/test_3.json",
+                        "/static/json/proflib_json_files/test_4.json",
+                        "/static/json/proflib_json_files/test_5.json"
+                    ];
+    
 
     self.duration = 750;
 
@@ -35,7 +43,7 @@ function Visualizer() {
     self.g = self.svg.append("g")
         .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")");
 
-    self.tree = new Tree(self, self.jsonFile);
+    self.tree = new Tree(self, self.jsonFiles);
 
     d3.select(self.frameElement).style("height", adjustedHeight+"px");
     
