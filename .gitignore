@@ -1,3 +1,4 @@
 *.swp
 *.egg-info
 *.pyc
+*parse_file_lib_json_files
