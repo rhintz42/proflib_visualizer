@@ -35,15 +35,15 @@
             "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/config/views.py\", line 501, in _requestonly_view\n    response = view(request)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 47, in my_view\n    b = bar(False)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 36, in bar\n    d = ba(4)\n", 
-            "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 83, in wrapped\n    response = func(*args, **kwargs)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 85, in wrapped\n    response = func(*args, **kwargs)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 18, in ba\n    return d\n", 
-            "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 56, in tracer\n    func.frame_list.add_frame(frame)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 57, in tracer\n    func.frame_list.add_frame(frame)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_list.py\", line 73, in add_frame\n    self._add_py_frame_to_frame_map(key, py_frame)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_list.py\", line 145, in _add_py_frame_to_frame_map\n    self._frame_map[key] = Frame(py_frame, pos=self.num_frames)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame.py\", line 31, in __init__\n    pos=pos)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame.py\", line 45, in _init_with_py_frame\n    self.frame_stack_trace = FrameStackTrace(self)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_stack_trace.py\", line 13, in __init__\n    self.stack_trace = traceback.format_stack()\n"
         ], 
-        "time": 1398555143.987958
+        "time": 1398584107.147846
     }
 ]

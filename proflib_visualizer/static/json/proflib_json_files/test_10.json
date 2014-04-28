@@ -15,8 +15,8 @@
         "function_name": "ba", 
         "line_number": 15, 
         "local_variables": {
-            "d": "j", 
-            "var": "j"
+            "d": "z", 
+            "var": "z"
         }, 
         "parent": null, 
         "pos_called_in": 1, 
@@ -33,8 +33,8 @@
             "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/router.py\", line 163, in handle_request\n    response = view_callable(context, request)\n", 
             "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/config/views.py\", line 355, in rendered_view\n    result = view(context, request)\n", 
             "  File \"/opt/webapp/proflib/local/lib/python2.7/site-packages/pyramid-1.5b1-py2.7.egg/pyramid/config/views.py\", line 501, in _requestonly_view\n    response = view(request)\n", 
-            "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 46, in my_view\n    b = bar(True)\n", 
-            "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 34, in bar\n    k = ba('j')\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 47, in my_view\n    b = bar(False)\n", 
+            "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 37, in bar\n    k = ba('z')\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 85, in wrapped\n    response = func(*args, **kwargs)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/views.py\", line 18, in ba\n    return d\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/lib/decorators.py\", line 57, in tracer\n    func.frame_list.add_frame(frame)\n", 
@@ -44,6 +44,6 @@
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame.py\", line 45, in _init_with_py_frame\n    self.frame_stack_trace = FrameStackTrace(self)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_stack_trace.py\", line 13, in __init__\n    self.stack_trace = traceback.format_stack()\n"
         ], 
-        "time": 1398584107.146363
+        "time": 1398584049.780648
     }
 ]

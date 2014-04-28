@@ -10,6 +10,7 @@
         <script src="static/js/nodes.js"></script>
         <script src="static/js/tree.js"></script>
         <script src="static/js/visualizer.js"></script>
+        <script src="static/esparse.js"></script>
     </head>
 
     <body>

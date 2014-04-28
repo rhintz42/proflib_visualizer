@@ -44,6 +44,6 @@
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame.py\", line 45, in _init_with_py_frame\n    self.frame_stack_trace = FrameStackTrace(self)\n", 
             "  File \"/opt/webapp/proflib/src/proflib/proflib/models/frame_stack_trace.py\", line 13, in __init__\n    self.stack_trace = traceback.format_stack()\n"
         ], 
-        "time": 1398584107.146363
+        "time": 1398584049.777407
     }
 ]
