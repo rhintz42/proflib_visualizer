@@ -22,6 +22,7 @@ function Visualizer() {
     //self.jsonFiles = ["/static/json/anweb.json"];
     //self.jsonFiles = ["/static/json/anweb_2.json"];
     self.jsonFiles = ["/static/json/parse_file_lib_json_files/test_2.json"];
+    
     /*
     self.jsonFiles = [
                         "/static/json/proflib_json_files/test_1.json",
@@ -31,6 +32,7 @@ function Visualizer() {
                         "/static/json/proflib_json_files/test_5.json"
                     ];
     */
+    
     
 
     self.duration = 750;
