@@ -32,6 +32,7 @@ function Visualizer() {
                     ];
     
     
+    
 
     self.duration = 750;
 
