@@ -1,6 +1,8 @@
 // TODO: FUNCTIONNS TO ADD
 //  - toggleCollapse
 //  - hide (Maybe not for now)
+// TODO: Selected Element should be different color
+// TODO: Have an array of selected nodes instead of just a single element
 function NodeList(tree, nodes) {
     var self = this;
 

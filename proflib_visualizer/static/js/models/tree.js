@@ -1,4 +1,5 @@
-//function Tree(visualizer, jsonFile) {
+// TODO: Create Getters and Setters for this class
+//       - Change all the properties to lead with an underscore
 function Tree(visualizer, jsonFiles) {
     var self = this;
 
@@ -7,17 +8,25 @@ function Tree(visualizer, jsonFiles) {
     self.nodeCount = 0;
 
     self.tree = d3.layout.tree()
-        .size([self.visualizer.getHeight(), self.visualizer.getWidth()]);
+        .size([
+            self.visualizer.getHeight(),
+            self.visualizer.getWidth()
+        ]);
 
-    //self.createNodesAndLinks(self.visualizer.jsonFile);
-    self.createNodesAndLinks(self.visualizer.jsonFiles, 0);
+    self.initializeNodesAndLinks(self.visualizer.jsonFiles);
+
+    self.initializeTreeDOMElements();
+}
+
+Tree.prototype.initializeTreeDOMElements = function() {
+    var self = this;
     
-    // Put in function like initialize buttons
     $( "#node-add" )
         .click( function () {
-            var nodes = self.getNodeList();
-            var selectedNode = nodes.selected;
+            var nodes = self.getNodeList(),
+                selectedNode = nodes.selected;
 
+            // Does Node exist
             if(selectedNode === null)
                 selectedNode = self.root;
 
@@ -36,12 +45,17 @@ function Tree(visualizer, jsonFiles) {
         });
     $( "#node-delete" )
         .click( function () {
-            var nodes = self.getNodeList();
-            var selectedNode = nodes.selected;
+            var nodes = self.getNodeList(),
+                selectedNode = nodes.selected;
 
+            // Does Node exist
             if(selectedNode == null)
                 return;
 
+            // Remove Node
+            // TODO: Create function that takes a callback function that can
+            //          serve as a function for organice up, organize down and
+            //          delete
             var parentNode = selectedNode.parent;
             for(var i = 0; i < parentNode.children.length; i++) {
                 if(parentNode.children[i].id == selectedNode.id) {
@@ -58,12 +72,14 @@ function Tree(visualizer, jsonFiles) {
         });
     $( "#node-organize-up" )
         .click( function () {
-            var nodes = self.getNodeList();
-            var selectedNode = nodes.selected;
+            var nodes = self.getNodeList(),
+                selectedNode = nodes.selected;
 
+            // Does Node exist
             if(selectedNode == null)
                 return;
 
+            // Move node up in array
             var parentNode = selectedNode.parent;
             for(var i = parentNode.children.length-1; i > 0; i--) {
                 if(parentNode.children[i].id == selectedNode.id) {
@@ -83,6 +99,7 @@ function Tree(visualizer, jsonFiles) {
             if(selectedNode == null)
                 return;
 
+            // Move node down in array
             var parentNode = selectedNode.parent;
             for(var i = 0; i < parentNode.children.length-1; i++) {
                 if(parentNode.children[i].id == selectedNode.id) {
@@ -97,20 +114,23 @@ function Tree(visualizer, jsonFiles) {
 }
 
 
+// Callapse the children of a node
+function collapse(d) {
+    if (d && d.children) {
+        d._children = d.children;
+        d._children.forEach(collapse);
+        d.children = null;
+    }
+}
+
+// Callapse all of the children of a node tree
 Tree.prototype.collapseChildren = function() {
     var self = this;
-
-    function collapse(d) {
-        if (d && d.children) {
-            d._children = d.children;
-            d._children.forEach(collapse);
-            d.children = null;
-        }
-    }
     self.root.children.forEach(collapse);
 }
 
 
+// Create and return LinkList object
 Tree.prototype.createLinks = function() {
     var self = this,
         nodes = self.getAllNodes(),
@@ -120,6 +140,7 @@ Tree.prototype.createLinks = function() {
 }
 
 
+// Create and return NodeList object
 Tree.prototype.createNodes = function() {
     var self = this,
         nodes = self.getAllNodes();
@@ -194,12 +215,13 @@ Tree.prototype.recFormatChildren = function(root) {
     }
 }
 
-Tree.prototype.createNodesAndLinks = function(jsonFiles, index) {
-    var self = this;
+Tree.prototype.initializeNodesAndLinks = function(jsonFiles) {
+    var self = this,
+        index = 0;
     
     self.root = newDummyRoot();
 
-    self.recCreateNodesAndLinks(jsonFiles, index = 0)
+    self.recCreateNodesAndLinks(jsonFiles, index)
 
     return self.root;
 }
@@ -210,6 +232,9 @@ Tree.prototype.getAllLinksForNodes = function(nodes) {
     return self.tree.links(nodes);
 }
 
+/*
+ * Get all Nodes Object
+ */
 Tree.prototype.getNodeList = function() {
     return this.nodes;
 }
@@ -230,7 +255,9 @@ Tree.prototype.getAllNodes = function() {
     return nodes;
 }
 
-
+/*
+ * Get the duration of the animation from the Visualizer Class
+ */
 Tree.prototype.getDuration = function() {
     var self = this;
 
@@ -238,13 +265,18 @@ Tree.prototype.getDuration = function() {
 }
 
 
+/*
+ * Return the SVG object from the Visualizer class
+ */
 Tree.prototype.getSVG = function() {
     var self = this;
 
     return self.visualizer.g;
 }
 
-// Compute the new tree layout.
+/*
+ * Compute and update the display for the new tree layout
+ */
 Tree.prototype.update = function(parentNode) {
     var self = this,
         nodes = self.getAllNodes(),
@@ -255,6 +287,12 @@ Tree.prototype.update = function(parentNode) {
 }
 
 //---------------------------------- Functions -----------------------------
+/*
+ * Create and return a dummy root for the tree
+ * 
+ * Why do we do this? So that we can have many root nodes that this dummy node
+ *  then points to
+ */
 function newDummyRoot() {
     return {
         'name': 'root',

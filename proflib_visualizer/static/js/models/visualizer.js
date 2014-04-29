@@ -1,3 +1,4 @@
+// TODO: Create Getters and Setters for this class
 // TODO: Add Testing Framework: Chai & Mocha
 // TODO: Zoom In
 // TODO: Zoom Out
@@ -5,6 +6,8 @@
 // TODO: Create ViewBox Object
 // TODO: Create `Focus` button that will focus on the selected node and hide
 //          the others
+// TODO: ParseFileLib: Pull things from Github to analyze here
+// TODO: Create an actual, one page site for this
 
 /*
  * Encapsulates all of the d3 objects for creating a tree structure
