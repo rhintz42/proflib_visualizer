@@ -6,11 +6,10 @@
 
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="static/js/links.js"></script>
-        <script src="static/js/nodes.js"></script>
-        <script src="static/js/tree.js"></script>
-        <script src="static/js/visualizer.js"></script>
-        <script src="static/esparse.js"></script>
+        <script src="static/js/models/links.js"></script>
+        <script src="static/js/models/nodes.js"></script>
+        <script src="static/js/models/tree.js"></script>
+        <script src="static/js/models/visualizer.js"></script>
     </head>
 
     <body>
@@ -18,10 +17,6 @@
             <select class="action-type" name="node">
                 <option selected="toggle">toggle</option>
                 <option>select</option>
-                <option>add</option>
-                <option>delete</option>
-                <option>edit</option>
-                <option>organize</option>
             </select>
         </div>
         <div id="tree-modify">
