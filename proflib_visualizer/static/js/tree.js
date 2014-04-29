@@ -142,7 +142,9 @@ Tree.prototype.recCreateNodesAndLinks = function(jsonFiles, index) {
         
         // Add each root node from the jsonFile to the children of the dummy root
         obj.forEach(function(d) {
-          self.root.children.push(d)
+          if (d !== null) {
+              self.root.children.push(d)
+          }
         });
 
         if((index+1) < jsonFiles.length) {
@@ -153,10 +155,43 @@ Tree.prototype.recCreateNodesAndLinks = function(jsonFiles, index) {
 
             self.links = self.createLinks();
             self.nodes = self.createNodes();
+
+            self.recFormatChildren(self.root);
             self.update(self.root);
         }
 
     });
+}
+
+Tree.prototype.recFormatChildren = function(root) {
+    var self = this,
+        i = 0;
+
+    if(root.children) {
+        while(i < root.children.length) {
+            if(root.children[i] === null) {
+                root.children.splice(i, 1);
+                i--;
+            }
+            i++
+        }
+
+        for(var j in root.children) {
+            self.recFormatChildren(root.children[j]);
+        }
+    } else if (root._children) {
+        while(i < root._children.length) {
+            if(root._children[i] === null) {
+                root._children.splice(i, 1);
+                i--;
+            }
+            i++
+        }
+
+        for(var j in root._children) {
+            self.recFormatChildren(root._children[j]);
+        }
+    }
 }
 
 Tree.prototype.createNodesAndLinks = function(jsonFiles, index) {
@@ -181,7 +216,7 @@ Tree.prototype.getNodeList = function() {
 
 Tree.prototype.getAllNodes = function() {
     var self = this,
-        nodes = self.tree.nodes(self.root).reverse(),
+        nodes = this.tree.nodes(this.root).reverse(),
         i;
 
     //removes the dummy root node from the array
